@@ -59,16 +59,28 @@
 
           <div class="main__top-level">
             <!-- square image 1 -->
-            <button class="product side__menu" target="blank" data-type="top-menu" data-filter="frozen">
-                <img src="image/products/1000.jpg" class="product__img" alt="Youtube">
+            <div class="product" data-type="top-menu">
+              <img src="image/products/1000.jpg" class="product__img">
+              <div class="main__menu">
+                <button class="side__top-menu-item" data-filter="frozen">
+                  Frozen Food
+                </button>
+              </div>
+            </div>
 
-                <div class="product__name">
-                  <h4>Frozen Food</h4>
-                </div>
-            </button>
+            <!-- Second level item -->
+            <div class="product invisible" data-type="frozen">
+              <img src="image/products/1004.jpg" class="product__img">
+              <div class="main__menu">
+                <button class="side__top-menu-item" data-filter="frozen2">
+                  ICE Cream
+                </button>
+              </div>
+            </div>
+
 
             <!-- third level item -->
-            <div class="product product__item invisible" data-type="frozen">
+            <div class="product product__item invisible" data-type="frozen2">
               <img src="image/products/1004.jpg" class="product__img" alt="icecream">
               <div class="product__menu">
                 <h4>ICE Cream</h4>
@@ -80,7 +92,7 @@
 
             
             <!-- square image 2 -->
-            <a href="http://www.google.com" class="product" target="blank" data-type="frozen">
+            <a href="http://www.google.com" class="product" target="blank" data-type="top-menu">
                 <img src="image/products/2000.jpg" class="product__img" alt="Youtube">
 
 
@@ -100,6 +112,7 @@
                   </div>
                   <div class="product__description">
                     <p>Are you thirsty?</p>
+                    <button class="side__top-menu-item" data-filter="beverage">Beverages</button>
                 </div>
             </a>
 
