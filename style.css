@@ -146,9 +146,9 @@ button {
     color: var(--color-beige);
     padding: 16px;
 }
-.side__menu {
+.side__top-menu {
     display: flex;
-    
+    flex-direction: column;
 }
 
 .side__top-menu-item {
@@ -261,6 +261,18 @@ button {
 .product__description p {
     color: var(--color-beige);
     text-align: center;
+}
+.product__description button {
+    text-align: center;
+    background-color: var(--color-beige);
+    padding: 4px;
+    margin: 8px auto;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
 }
 
 .product:hover .product__description{
