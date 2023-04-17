@@ -15,6 +15,29 @@
     <label for="">name: </label>
     <input id="input_name" type="text">
 
+    <table>
+        <form action="viewfilms.php" method="get">
+        <h2>List the movies by year</h2>
+        <tr><td>
+        Year Made in or After<span style="color:red">*</span></td>
+        <td>
+        <input type="text" name="earliest_made" width="20"></td></tr>
+        <tr><td>
+        </td>
+        <tr><td>
+        Year Made Before or in<span style="color:red">*</span></td>
+        <td>
+        <input type="text" name="latest_made" width="20"><br>
+        </td></tr>
+        <tr><td colspan="2" align="center">
+        <input type="submit" value="Retrieve Data">
+        </td></tr>
+        </form>
+    </table>
+
 </body>
 
 </html>
+
+
+
