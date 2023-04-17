@@ -42,11 +42,12 @@
         <!-- Navbar top level menu -->
         <div class="side__menu">
           <ul class="side__top-menu">
-            <li class="side__top-menu-item active" >Frozen Food</li>
-            <li class="side__top-menu-item">Fresh Food</li>
-            <li class="side__top-menu-item">Beverages</li>
-            <li class="side__top-menu-item">Home Health</li>
-            <li class="side__top-menu-item">Pet Food</li>
+            <button class="side__top-menu-item" data-filter="top-menu"> Home </button>
+            <button class="side__top-menu-item" data-filter="frozen" >Frozen Food</button>
+            <button class="side__top-menu-item" data-filter="fresh">Fresh Food</button>
+            <button class="side__top-menu-item" data-filter="beverage">Beverages</button>
+            <button class="side__top-menu-item" data-filter="health">Home Health</button>
+            <button class="side__top-menu-item"data-filter="pet">Pet Food</button>
           </ul>
         </div>
   
@@ -58,22 +59,28 @@
 
           <div class="main__top-level">
             <!-- square image 1 -->
-            <a href="http://www.google.com" class="product" target="blank">
+            <button class="product side__menu" target="blank" data-type="top-menu" data-filter="frozen">
                 <img src="image/products/1000.jpg" class="product__img" alt="Youtube">
 
                 <div class="product__name">
                   <h4>Frozen Food</h4>
                 </div>
-                <div class="product__description">
-                  <p>Frozen Food cateory                
-                  </p>
-                  <button class="main-add">Add</button>   
+            </button>
+
+            <!-- third level item -->
+            <div class="product product__item invisible" data-type="frozen">
+              <img src="image/products/1004.jpg" class="product__img" alt="icecream">
+              <div class="product__menu">
+                <h4>ICE Cream</h4>
+                <p>Quantity: 1L</p>
+                <p>Price: 1.80</p>
+                <button class="add-item">Add</button>  
               </div>
+            </div>
 
-            </a>
-
+            
             <!-- square image 2 -->
-            <a href="http://www.google.com" class="product" target="blank">
+            <a href="http://www.google.com" class="product" target="blank" data-type="frozen">
                 <img src="image/products/2000.jpg" class="product__img" alt="Youtube">
 
 
@@ -86,7 +93,7 @@
             </a>
 
             <!-- square image 3 -->
-            <a href="http://www.google.com" class="product" target="blank">
+            <a href="http://www.google.com" class="product" target="blank" data-type="top-menu">
                 <img src="image/products/3000.jpg" class="product__img" alt="Youtube">
                   <div class="product__name">
                     <h3>Beverages</h3>
@@ -97,7 +104,7 @@
             </a>
 
             <!-- square image 4 -->
-            <a href="http://www.google.com" class="product" target="blank">
+            <a href="http://www.google.com" class="product" target="blank" data-type="top-menu">
                 <img src="image/products/4000.jpg" class="product__img" alt="Youtube">
 
                 <div class="product__name">
@@ -109,7 +116,7 @@
             </a>
 
             <!-- square image 5 -->
-            <a href="http://www.google.com" class="product" target="blank">
+            <a href="http://www.google.com" class="product" target="blank" data-type="top-menu">
                 <img src="image/products/5000.jpg" class="product__img" alt="Youtube">
 
 
@@ -134,7 +141,7 @@
           <table border=0 width="100%" height="100%">
             <tr class="cart">
               <td>
-                  <iframe name="view" src="submitForm.php" frameborder=0 width="100%" height="100%"></iframe>
+                  <!-- <iframe name="view" src="submitForm.php" frameborder=0 width="100%" height="100%"></iframe> -->
                 </a>
               </td>
             </tr>

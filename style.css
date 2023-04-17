@@ -220,6 +220,24 @@ button {
     
 }
 
+.product.invisible {
+    display: none;
+}
+
+.product__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 300px;
+    margin: 6px;
+    background-color: white;
+    
+}
+
+
 .product__img {
     max-width: 65%;
     max-height: 65%;
@@ -279,3 +297,23 @@ button {
     opacity: 0.8;
 }
 
+.product__menu {
+    text-align: center;
+}
+
+.product__menu h5{
+    font-size: small;
+    margin: 0px;
+}
+.product__menu p{
+    font-size: small;
+}
+
+.add-item {
+    border: var(--color-black);
+}
+
+.add-item:hover {
+    border: var(--color-black);
+    background-color: #153c56;
+}
