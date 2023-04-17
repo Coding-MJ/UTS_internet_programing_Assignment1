@@ -43,7 +43,8 @@
         <div class="side__menu">
           <ul class="side__top-menu">
             <button class="side__top-menu-item" data-filter="top-menu"> Home </button>
-            <button class="side__top-menu-item" data-filter="frozen" >Frozen Food</button>
+            <button class="side__top-menu-item frozenFood" data-filter="frozen" >Frozen Food</button>
+            <button class="side__top-menu-item second-menu" data-filter="frozen-product">ICE Cream</button>
             <button class="side__top-menu-item" data-filter="fresh">Fresh Food</button>
             <button class="side__top-menu-item" data-filter="beverage">Beverages</button>
             <button class="side__top-menu-item" data-filter="health">Home Health</button>
@@ -83,10 +84,10 @@
             <div class="product product__item" data-type="frozen-product">
               <img src="image/products/1004.jpg" class="product__img" alt="icecream">
               <div class="product__menu">
-                <h4>ICE Cream</h4>
-                <p>Quantity: 1L</p>
-                <p>Price: 1.80</p>
-                <button class="add-item">Add</button>  
+                <h4 #item-name>ICE Cream</h4>
+                <p item-quantity>Quantity: 1L</p>
+                <p #item-price>Price: 1.80</p>
+                <button class="add-item" onclick="addItemToCart()">Add</button>  
               </div>
             </div>
 
@@ -154,7 +155,7 @@
           <table border=0 width="100%" height="100%">
             <tr class="cart">
               <td>
-                  <!-- <iframe name="view" src="submitForm.php" frameborder=0 width="100%" height="100%"></iframe> -->
+                  <iframe name="view" src="form.html" frameborder=0 width="100%" height="100%"></iframe>
                 </a>
               </td>
             </tr>

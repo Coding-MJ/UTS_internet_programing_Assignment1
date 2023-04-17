@@ -169,6 +169,13 @@ button {
     border-radius: var(--size-border-radius);
 }
 
+.second-menu {
+    display: none;
+}
+
+.second-menu.open {
+    display: block;
+}
 
 
 /* Section Common */
