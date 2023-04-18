@@ -1,3 +1,74 @@
+<?php
+
+//Procedural style
+$connection = mysqli_connect('localhost:3309', 'root', '', 'assignment1'); // servername, username, password, db_name
+
+
+
+$total = 0;
+$products = isset($_SESSION['products'])? $_SESSION['products']:[];
+
+foreach($products as $name => $product){
+  $subtotal = (int)$product['unit_price']*(int)$product['count'];
+  $total += $subtotal;
+  }
+
+if (mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  exit;
+  }
+  
+//   $categoryName = $_GET['category_name'] ?? ''; // Use null coalescing operator to handle cases where variable is not set
+
+// $subCategory = $_GET['subCategory'] ?? '';
+
+// Query to fetch all products
+
+$query = "SELECT * FROM products";
+
+// $query = "SELECT * FROM products WHERE categoryName = '$categoryName' AND subCategory = '$subCategory'";
+
+// Execute the query and get the result
+
+$result = mysqli_query($connection, $query);
+
+
+session_start();
+
+?>
+
+<?php
+
+$name = isset($_POST['product_name'])? htmlspecialchars($_POST['product_name'], ENT_QUOTES, 'utf-8') : '';
+$unit_price = isset($_POST['unit_price'])? htmlspecialchars($_POST['unit_price'], ENT_QUOTES, 'utf-8') : '';
+$count = isset($_POST['count'])? htmlspecialchars($_POST['count'], ENT_QUOTES, 'utf-8') : '';
+
+ if (isset($_SESSION['products'])) {
+  $products = $_SESSION['products'];
+  foreach($products as $key => $product){
+
+    if($key == $name){
+   $count = (int)$count + (int)$product['count'];
+    } 
+  }
+}
+
+
+if($name!=''&&$count!=''&&$unit_price!=''){
+  $_SESSION['products'][$name]=[
+    'count' => $count,
+    'unit_price' => $unit_price
+    ];
+}
+
+$products = isset($_SESSION['products'])? $_SESSION['products']:[];
+$products = isset($_SESSION['products'])? $_SESSION['products']:[];
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -59,6 +130,58 @@
           <div class="section__container">
 
           <div class="main__top-level">
+
+
+ <?php
+
+
+
+ if (mysqli_num_rows($result) > 0) {
+while ($row = mysqli_fetch_array($result)) {
+echo '<div class="col-md-4">';
+ echo '<div class="card my-2">';
+ echo '<img src="image/products/' . $row['product_id'] . '.jpg" alt="img" class="card-img-top card-image">';
+
+ echo '<div class="card-body">';
+
+ echo '<h4 class="card-title">' . $row['product_name'] . '</h4>';
+ echo '<h4 class="card-title">' . $row['unit_price'] . '</h4>';
+ echo '<p class="card-text">' . 'Number of Stock: '. $row['in_stock'] . '</p>';
+ if ($row['in_stock'] > 0) {
+ echo '<form action="index.php" method="POST" class="item-form">';
+echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
+echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
+ echo '<input type="text" value="1" name="count">';
+ echo '<button type="submit" class="btn-sm btn-blue">Add to Cart</button>';
+echo '</form>';
+ } else {
+
+//  echo '<p class="card-text">Out of Stock</p>';
+// }
+//  echo '<a href="item_details.php?id=' . $row['product_id'] . '" class="btn-sm">Product Details</a>';
+//  echo '</div>';
+//  echo '</div>';
+//  echo '</div>';
+//  }
+
+// } else {
+//  echo "No products found";
+
+}
+}
+ }
+
+
+
+mysqli_close($connection);
+
+?>
+
+
+
+
+
+
             <!-- square image 1 -->
             <div class="product" data-type="top-menu">
               <img src="image/products/1000.jpg" class="product__img">
@@ -87,7 +210,9 @@
                 <h4 #item-name>ICE Cream</h4>
                 <p item-quantity>Quantity: 1L</p>
                 <p #item-price>Price: 1.80</p>
-                <button class="add-item" onclick="addItemToCart()">Add</button>  
+                <form action='index.php' method="POST">
+                <button class="add-item" 
+                type="submit" onclick="addItemToCart()">Add</button>  
               </div>
             </div>
 
@@ -155,7 +280,7 @@
           <table border=0 width="100%" height="100%">
             <tr class="cart">
               <td>
-                  <iframe name="view" src="form.html" frameborder=0 width="100%" height="100%"></iframe>
+                  <iframe name="view" src="cart.php" frameborder=0 width="100%" height="100%"></iframe>
                 </a>
               </td>
             </tr>
