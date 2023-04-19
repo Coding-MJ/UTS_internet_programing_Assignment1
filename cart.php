@@ -82,6 +82,9 @@ function updateQuantity(name, price) {
 	<p>Your shopping cart is empty.</p>
 
 <?php else: ?>
+	<div class="cart__table">
+
+
 	<table class="cart-table">
 		<thead>
 			<tr>
@@ -104,7 +107,7 @@ function updateQuantity(name, price) {
 				<td>
 					<form action="cart.php" method="post">
 					<input type="hidden" name="delete_name" value="<?php echo $name; ?>">
-				<button type="submit" class="btn delete-btn">Delete</button>
+				<button type="submit" class="delete-btn">Delete</button>
 				</form>
 				</td>
 			</tr>
@@ -115,12 +118,13 @@ function updateQuantity(name, price) {
 			</tr>
 		</tbody>
 	</table>
-
+				
 
 		<div class="cart-btn">
-			<button type="button" class="btn btn-blue" onclick="location.href='checkout.php'" onsubmit="return validateQuantity();" <?php if(empty($products)) echo 'disabled="disabled"'; ?>>Checkout</button>
-			<button type="button" class="btn btn-success" onclick="location.href='index.php'">Continue Shopping</button>
+			<button type="button" class="checkout-btn" onclick="location.href='checkout.php'" onsubmit="return validateQuantity();" <?php if(empty($products)) echo 'disabled="disabled"'; ?>>Checkout</button>
+			<!-- <button type="button" class="btn btn-success" onclick="location.href='index.php'">Continue Shopping</button> -->
 		</div>
+	</div>
 	</div>
 	<?php endif; ?>
 	</body>
