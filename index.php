@@ -147,12 +147,12 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
                           echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
                           echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
                           echo '<input type="text" value="1" name="count">';
-                          echo '<button type="submit" class="btn-sm btn-blue">Add to Cart</button>';
+                          echo '<button type="submit" class="add-item">Add to Cart</button>';
                           echo '</form>';
                         } else {
                           echo '<p class="card-text">Out of Stock</p>';
                         }
-                        echo '<a href="item_details.php?id=' . $row['product_id'] . '" class="btn-sm">Product Details</a>';
+                        echo '<a href="item_details.php?id=' . $row['product_id'] . '" class="add-item">Product Details</a>';
                       echo '</div>';
                     
                   echo '</div>';

@@ -46,7 +46,7 @@ body {
 
 a {
     text-decoration: none;
-    color: var(--color-beige);
+    color: var(--color-black);
 }
 
 ul {
@@ -94,7 +94,7 @@ p {
 button {
     background-color: transparent;
     cursor: pointer;
-    border: none;
+    border: 1px solid var(--color-black);
     outline: none;
     border-radius: var(--size-border-radius);
 }
@@ -123,8 +123,8 @@ button {
 
 
 .search-button {
-    border: 1px solid var(--color-beige);
-    color: var(--color-beige);
+    border: 1px solid var(--color-black);
+    color: var(--color-black);
     padding: 4px 12px;
     margin: 0 4px;
 }
@@ -321,6 +321,11 @@ button {
 
 .add-item {
     border: var(--color-black);
+    border-radius: var(--size-border-radius);
+    border: 1px solid var(--color-black);
+    font-size: small;
+    padding: 2px;
+    color: var(--color-black);
 }
 
 .add-item:hover {
@@ -333,6 +338,7 @@ button {
     position: fixed;
     width: 100%;
     display: flex;
+    
     justify-content: space-between;
     background-color: var(--color-red);
     align-items: center;
@@ -343,9 +349,18 @@ button {
 
 .cart-table {
     border: 1px solid red;
+    align-content: right;
 }
 
 .table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
+}
+
+.item-form {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-content: center;
+    margin: auto;
 }
