@@ -18,9 +18,9 @@ if (mysqli_connect_errno()) {
   exit;
   }
   
-//   $categoryName = $_GET['category_name'] ?? ''; // Use null coalescing operator to handle cases where variable is not set
+$categoryName = $_GET['category_name'] ?? ''; // Use null coalescing operator to handle cases where variable is not set
 
-// $subCategory = $_GET['subCategory'] ?? '';
+$subCategory = $_GET['subCategory'] ?? '';
 
 // Query to fetch all products
 
@@ -263,62 +263,19 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
 
 
 
-        <!-- Shopping Cart -->
+        <!-- Product Detail -->
         <div class="right">
           <iframe name="view" src="checkout.php" frameborder=0 width="100%" height="400px"></iframe>
-          <!-- <iframe name="view" src="cart.php" frameborder=0 width="100%" height="400px"></iframe> -->
         </div>
-
-        <!-- <section id="right">
-          detail
-          
-           <iframe name="view" src="cart.php" frameborder=0></iframe> -->
-          <!-- </div>
-          </section> -->
-
-
-
-          <!-- <iframe class = "detail" name="view" src="cart.php" frameborder=0 width="100%" height="350px"></iframe>
-          <iframe class = "cart" name="view" src="cart.php" frameborder=0 width="100%" height="350px"></iframe> -->
-
-          <!-- <section id="detail">
-            <div>This is item details</div>
-            <iframe name="view" src="cart.php" frameborder=0 width="100%" ></iframe>
-          </section>
-            
-
-          <section id="cart"> 
-            <div>this is cart</div> 
-            <iframe name="view" src="cart.php" frameborder=0 width="100%" ></iframe>
-
-            <table border=0 width="100%" height="100%">
-
-            <tr class="cart">
-                <td>
-                  <iframe name="view" src="cart.php" frameborder=0 width="100%" height="50%"></iframe>
-                </a>
-              </td>
-              <tr class="cart">
-                <td>
-                  <iframe name="view" src="cart.php" frameborder=0 width="100%" height="50%"></iframe>
-                </a>
-              </td>
-            </tr>
-           </table> -->
-
-          <!-- </section> -->
-
-        
-
       </section>
+
+      <!-- Shopping Cart -->      
       <section id="cart">
         <iframe name="view" src="cart.php" frameborder=0 width="100%" height="50%"></iframe>
       </section>  
     </section>
     </body>
-    <footer>
-  
-    </footer>
+
 
 </html>
 

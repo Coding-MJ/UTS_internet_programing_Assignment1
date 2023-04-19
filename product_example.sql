@@ -7,6 +7,7 @@ use assignment1;
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `product_id` int(10) unsigned DEFAULT NULL,
+  `category_name` varchar(20) DEFAULT NULL,
   `product_name` varchar(20) DEFAULT NULL,
   `unit_price` float(8,2) DEFAULT NULL,
   `unit_quantity` varchar(15) DEFAULT NULL,

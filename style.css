@@ -340,3 +340,12 @@ button {
     padding: 16px;
     bottom: 0%;
 }
+
+.cart-table {
+    border: 1px solid red;
+}
+
+.table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
