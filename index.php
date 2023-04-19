@@ -85,6 +85,7 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
     </head>
     
     <body>
+    <section class="all">
       <!-- Navbar -->
       <nav id="navbar">
         <div class="navbar__logo">
@@ -130,52 +131,38 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
           <div class="section__container">
 
           <div class="main__top-level">
+            <?php
+              if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_array($result)) {
+                  echo '<div class="col-md-4">';
+                    echo '<div class="card my-2">';
+                    echo '<img src="image/products/' . $row['product_id'] . '.jpg" alt="img" class="card-img-top card-image">';
+                      echo '<div class="card-body">';
+                        echo '<h4 class="card-title">' . $row['product_name'] . '</h4>';
+                        echo '<p class="card-price">' . $row['unit_price'] . '</p>';
+                        echo '<p class="card-text">' . 'Number of Stock: '. $row['in_stock'] . '</p>';
+                        if ($row['in_stock'] > 0) {
+                          echo '<form action="index.php" method="POST" class="item-form">';
+                          echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
+                          echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
+                          echo '<input type="text" value="1" name="count">';
+                          echo '<button type="submit" class="btn-sm btn-blue">Add to Cart</button>';
+                          echo '</form>';
+                        } else {
+                          echo '<p class="card-text">Out of Stock</p>';
+                        }
+                        echo '<a href="item_details.php?id=' . $row['product_id'] . '" class="btn-sm">Product Details</a>';
+                      echo '</div>';
+                    echo '</div>';
+                  echo '</div>';
+                }
 
+              } else {
+                echo "No products found";
 
- <?php
-
-
-
- if (mysqli_num_rows($result) > 0) {
-while ($row = mysqli_fetch_array($result)) {
-echo '<div class="col-md-4">';
- echo '<div class="card my-2">';
- echo '<img src="image/products/' . $row['product_id'] . '.jpg" alt="img" class="card-img-top card-image">';
-
- echo '<div class="card-body">';
-
- echo '<h4 class="card-title">' . $row['product_name'] . '</h4>';
- echo '<h4 class="card-title">' . $row['unit_price'] . '</h4>';
- echo '<p class="card-text">' . 'Number of Stock: '. $row['in_stock'] . '</p>';
- if ($row['in_stock'] > 0) {
- echo '<form action="index.php" method="POST" class="item-form">';
-echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
-echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
- echo '<input type="text" value="1" name="count">';
- echo '<button type="submit" class="btn-sm btn-blue">Add to Cart</button>';
-echo '</form>';
- } else {
-
-//  echo '<p class="card-text">Out of Stock</p>';
-// }
-//  echo '<a href="item_details.php?id=' . $row['product_id'] . '" class="btn-sm">Product Details</a>';
-//  echo '</div>';
-//  echo '</div>';
-//  echo '</div>';
-//  }
-
-// } else {
-//  echo "No products found";
-
-}
-}
- }
-
-
-
-mysqli_close($connection);
-
-?>
+              }
+              mysqli_close($connection);
+            ?>
 
 
 
@@ -274,26 +261,64 @@ mysqli_close($connection);
 
 
 
+
+
         <!-- Shopping Cart -->
-        <section id="cart">
-          <p>this is cart</p> 
-          <table border=0 width="100%" height="100%">
+        <div class="right">
+          <iframe name="view" src="checkout.php" frameborder=0 width="100%" height="400px"></iframe>
+          <!-- <iframe name="view" src="cart.php" frameborder=0 width="100%" height="400px"></iframe> -->
+        </div>
+
+        <!-- <section id="right">
+          detail
+          
+           <iframe name="view" src="cart.php" frameborder=0></iframe> -->
+          <!-- </div>
+          </section> -->
+
+
+
+          <!-- <iframe class = "detail" name="view" src="cart.php" frameborder=0 width="100%" height="350px"></iframe>
+          <iframe class = "cart" name="view" src="cart.php" frameborder=0 width="100%" height="350px"></iframe> -->
+
+          <!-- <section id="detail">
+            <div>This is item details</div>
+            <iframe name="view" src="cart.php" frameborder=0 width="100%" ></iframe>
+          </section>
+            
+
+          <section id="cart"> 
+            <div>this is cart</div> 
+            <iframe name="view" src="cart.php" frameborder=0 width="100%" ></iframe>
+
+            <table border=0 width="100%" height="100%">
+
             <tr class="cart">
-              <td>
-                  <iframe name="view" src="cart.php" frameborder=0 width="100%" height="100%"></iframe>
+                <td>
+                  <iframe name="view" src="cart.php" frameborder=0 width="100%" height="50%"></iframe>
+                </a>
+              </td>
+              <tr class="cart">
+                <td>
+                  <iframe name="view" src="cart.php" frameborder=0 width="100%" height="50%"></iframe>
                 </a>
               </td>
             </tr>
-          </table>
+           </table> -->
 
-        </section>
-  
+          <!-- </section> -->
+
+        
 
       </section>
-      
-
+      <section id="cart">
+        <iframe name="view" src="cart.php" frameborder=0 width="100%" height="50%"></iframe>
+      </section>  
+    </section>
     </body>
+    <footer>
   
+    </footer>
 
 </html>
 

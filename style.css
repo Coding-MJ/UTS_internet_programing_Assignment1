@@ -103,6 +103,8 @@ button {
 /* Navbar */
 
 #navbar {
+    position: fixed;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     background-color: var(--color-red);
@@ -185,6 +187,7 @@ button {
 }
 
 .container {
+    padding-top: 55px;
     display: flex;
     justify-content: left;
     margin: auto;
@@ -323,4 +326,17 @@ button {
 .add-item:hover {
     border: var(--color-black);
     background-color: #153c56;
+}
+
+
+#cart {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-red);
+    align-items: center;
+    color: var(--color-beige);
+    padding: 16px;
+    bottom: 0%;
 }

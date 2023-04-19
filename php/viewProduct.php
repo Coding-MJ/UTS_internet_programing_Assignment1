@@ -1,6 +1,6 @@
 <?php
 
-//Procedural style
+// DB connection
 $connection = mysqli_connect('localhost:3309', 'root', '', 'assignment1'); // servername, username, password, db_name
  
 
