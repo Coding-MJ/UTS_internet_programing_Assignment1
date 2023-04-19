@@ -134,10 +134,11 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
             <?php
               if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_array($result)) {
-                  echo '<div class="col-md-4">';
-                    echo '<div class="card my-2">';
-                    echo '<img src="image/products/' . $row['product_id'] . '.jpg" alt="img" class="card-img-top card-image">';
-                      echo '<div class="card-body">';
+                  echo '<div class="product__item">';
+                    // echo '<div class="product__img">';
+                    echo '<img class="product__img" src="image/products/' . $row['product_id'] . '.jpg" alt="img" class="card-img-top card-image" >';
+                    // echo '</div>';
+                      echo '<div class="product__menu">';
                         echo '<h4 class="card-title">' . $row['product_name'] . '</h4>';
                         echo '<p class="card-price">' . $row['unit_price'] . '</p>';
                         echo '<p class="card-text">' . 'Number of Stock: '. $row['in_stock'] . '</p>';
@@ -153,7 +154,7 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
                         }
                         echo '<a href="item_details.php?id=' . $row['product_id'] . '" class="btn-sm">Product Details</a>';
                       echo '</div>';
-                    echo '</div>';
+                    
                   echo '</div>';
                 }
 
@@ -173,7 +174,7 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
             <div class="product" data-type="top-menu">
               <img src="image/products/1000.jpg" class="product__img">
               <div class="main__menu">
-                <button class="side__top-menu-item" data-filter="frozen">
+                <button class="mside__top-menu-ite" data-filter="frozen">
                   Frozen Food
                 </button>
               </div>

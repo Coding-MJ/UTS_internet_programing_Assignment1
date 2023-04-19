@@ -249,8 +249,8 @@ button {
 
 
 .product__img {
-    max-width: 65%;
-    max-height: 65%;
+    max-width: 50%;
+    max-height: 50%;
 }
 
 /* .product_text{
