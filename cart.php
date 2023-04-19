@@ -5,7 +5,7 @@ $delete_name = isset($_POST['delete_name'])? htmlspecialchars($_POST['delete_nam
 
 if($delete_name != '') unset($_SESSION['products'][$delete_name]);
 
-$total = 0.0;
+$total = 0;
 $products = isset($_SESSION['products'])? $_SESSION['products']:[];
 
 
@@ -18,7 +18,10 @@ $name = isset($_POST['name'])? htmlspecialchars($_POST['name'], ENT_QUOTES, 'utf
 $price = isset($_POST['price'])? htmlspecialchars($_POST['price'], ENT_QUOTES, 'utf-8') : '';
 $count = isset($_POST['count'])? htmlspecialchars($_POST['count'], ENT_QUOTES, 'utf-8') : '';
 
+?>
 
+
+<?php
 
 if(isset($_SESSION['products'])){
 	$products = $_SESSION['products'];
@@ -32,7 +35,7 @@ if(isset($_SESSION['products'])){
 if($name!=''&&$count!=''&&$price!=''){
 	$_SESSION['products'][$name]=[
 		'count' => $count,
-		'price' => $price
+		'unit_price' => $price
 	];
 }
 
@@ -43,24 +46,24 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
 
 <script>
 function updateQuantity(name, price) {
-	var quantity = parseInt(document.getElementsByName(name + '_quantity')[0].value);
+	var quantity = parseInt(document.getElementsByName(name + 'unit_quantity')[0].value);
 	if (quantity > 20) {
 		alert('You cannot add more than 20 items of the same product');
-		document.getElementsByName(name + '_quantity')[0].value = 20;
+		document.getElementsByName(name + 'unit_quantity')[0].value = 20;
 		quantity = 20;
 	}
 
 	if (quantity === 50) {
 		alert('You cannot proceed with an order of 20 items of the same product');
-		document.getElementsByName(name + '_quantity')[0].value = 1;
+		document.getElementsByName(name + 'unit_quantity')[0].value = 1;
 		quantity = 1;
 	}
 
 	var productPrice = quantity * price;
-	document.getElementById(name + '_price').innerHTML = '$' + productPrice;
+	document.getElementById(name + 'unit_price').innerHTML = '$' + productPrice;
 
 	var total = 0;
-	var prices = document.querySelectorAll('td[id$="_price"]');
+	var prices = document.querySelectorAll('td[id$="unit_price"]');
 	for (var i = 0; i < prices.length; i++) {
 		total += parseFloat(prices[i].innerHTML.replace('$', ''));
 	}
@@ -95,7 +98,7 @@ function updateQuantity(name, price) {
 				<td label="product_name："><?php echo $name; ?></td>
 				<td label="unit_price：" class="text-right">$<?php echo $product['unit_price']; ?></td>
 				<td label="unit_quantity" class="text-right">
-					<input type="number" name="<?php echo $name; ?>_quantity" 
+					<input type="number" name="<?php echo $name; ?>unit_quantity" 
 					value="<?php echo $product['count']; ?>" min="1" max="20" onchange="updateQuantity('<?php echo $name; ?>', <?php echo $product['unit_price']; ?>)"></td>
 				<td label="unit_price" class="text-right" id="<?php echo $name; ?>unit_price">$<?php echo $product['unit_price']*$product['count']; ?></td>
 				<td>
