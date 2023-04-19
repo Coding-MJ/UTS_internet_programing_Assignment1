@@ -1,65 +1,53 @@
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>My form</title>
-	</head>
-	<body>
-		<form method="POST" action="submitForm_submitted.php">
-			<table>
-				<tr>
-					<td>
-						My name is: 
-					</td>
-					<td>
-						<input type="text" name="tName">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						My favourite movie is: 
-					</td>
-					<td>
-						<input type="text" name = "tMovie">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						My degree is: 
-					</td>
-					<td>
-						<select name = "sDegree">
-							<option>Bachelor</option>
-							<option>Masters</option>
-							<option>PhD</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Gender: 
-					</td>
-					<td>
-						<Input type = 'Radio' Name ='gender' value= 'male'>Male
-						<Input type = 'Radio' Name ='gender' value= 'female'>Female
-					</td>
-				</tr>
-				<tr>
-					<td>
-						My favourite unit(s) *multiselect: 
-					</td>
-					<td>
-						<select name="msunit[]" multiple="multiple" size="2">
-							<option value="Poti">Poti</option>
-							<option value="IP">IP</option>
-						</select>
-						<br>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type= "submit" name="goButton" value ="submit">
-					</td>
-				</tr>
-			</table>			
-		</form>	
-	</body>
-</html>	
+<head>
+	<title>Order Sheet</title>
+	<script>
+		function validateForm() {
+			var name = document.forms["orderForm"]["name"].value;
+			var address = document.forms["orderForm"]["address"].value;
+			var suburb = document.forms["orderForm"]["suburb"].value;
+			var state = document.forms["orderForm"]["state"].value;
+			var country = document.forms["orderForm"]["country"].value;
+			var email = document.forms["orderForm"]["email"].value;
+			if (name == "" || address == "" || suburb == "" || state == "" || country == "" || email == "") {
+				alert("Please fill out all required fields");
+				return false;
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>Order Sheet</h1>
+	<form name="orderForm" action="processOrder.php" onsubmit="return validateForm()" method="post">
+		<table>
+			<tr>
+				<td>Name:</td>
+				<td><input type="text" name="name"></td>
+			</tr>
+			<tr>
+				<td>Address:</td>
+				<td><input type="text" name="address"></td>
+			</tr>
+			<tr>
+				<td>Suburb:</td>
+				<td><input type="text" name="suburb"></td>
+			</tr>
+			<tr>
+				<td>State:</td>
+				<td><input type="text" name="state"></td>
+			</tr>
+			<tr>
+				<td>Country:</td>
+				<td><input type="text" name="country"></td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td><input type="text" name="email"></td>
+			</tr>
+		</table>
+		<br>
+		<input type="submit" value="Submit Order">
+	</form>
+</body>
+</html>

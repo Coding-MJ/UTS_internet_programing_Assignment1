@@ -14,8 +14,8 @@ foreach($products as $name => $product){
 	$total += $subtotal;
 }
 
-$name = isset($_POST['name'])? htmlspecialchars($_POST['name'], ENT_QUOTES, 'utf-8') : '';
-$price = isset($_POST['price'])? htmlspecialchars($_POST['price'], ENT_QUOTES, 'utf-8') : '';
+$name = isset($_POST['product_name'])? htmlspecialchars($_POST['product_name'], ENT_QUOTES, 'utf-8') : '';
+$price = isset($_POST['unit_price'])? htmlspecialchars($_POST['unit_price'], ENT_QUOTES, 'utf-8') : '';
 $count = isset($_POST['count'])? htmlspecialchars($_POST['count'], ENT_QUOTES, 'utf-8') : '';
 
 ?>
@@ -79,7 +79,7 @@ function updateQuantity(name, price) {
 	<body>
 
 <?php if(empty($products)): ?>
-	<p>Your shopping cart is empty.</p>
+	<p class="empty-cart">Your shopping cart is empty.</p>
 
 <?php else: ?>
 	<div class="cart__table">

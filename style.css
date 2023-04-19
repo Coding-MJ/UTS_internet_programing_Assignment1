@@ -393,6 +393,11 @@ button {
     color: var(--color-beige);
 }
 
+.empty-cart {
+    color: var(--color-beige);
+}
+
+
 /* main item card */
 .item-form {
     display: flex;
