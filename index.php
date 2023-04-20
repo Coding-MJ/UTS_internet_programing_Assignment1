@@ -124,7 +124,7 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
       <!-- Navbar -->
       <nav id="navbar">
         <div class="navbar__logo">
-          <a href="#"><i class="fa-solid fa-cart-shopping"></i> Market</a>
+          <a href="index.php"><i class="fa-solid fa-cart-shopping"></i> Market</a>
         </div>
 
         <!-- search bar -->
