@@ -74,3 +74,14 @@ function addItemToCart() {
     cart.push(cartItem);
     localStorage.setItem("cart", JSON.stringify(cart));
   }
+
+
+
+  const addButton = document.querySelectorAll('.add-item');
+  addButton.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const productId = btn.getAttribute('href').split('=')[1];
+      window.location.href = `item_details.php?id=${productId}`;
+    });
+  });

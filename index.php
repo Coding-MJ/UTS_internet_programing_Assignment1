@@ -1,7 +1,7 @@
 <?php
 
 //Procedural style
-$connection = mysqli_connect('localhost:3309', 'root', '', 'assignment1'); // servername, username, password, db_name
+$connection = mysqli_connect('localhost:3309', 'root', '', 'assignment'); // servername, username, password, db_name
 
 
 
@@ -18,19 +18,30 @@ if (mysqli_connect_errno()) {
   exit;
   }
   
+// search filtering
 $categoryName = $_GET['category_name'] ?? ''; // Use null coalescing operator to handle cases where variable is not set
 
-$subCategory = $_GET['subCategory'] ?? '';
+$subCategory = $_GET['subcategory_name'] ?? '';
 
-// Query to fetch all products
 
 $query = "SELECT * FROM products";
 
 // $query = "SELECT * FROM products WHERE categoryName = '$categoryName' AND subCategory = '$subCategory'";
 
-// Execute the query and get the result
+
 
 $result = mysqli_query($connection, $query);
+
+
+if (!empty($categoryName) && !empty($subCategory)) {
+  $query = "SELECT * FROM products WHERE categoryName = '$categoryName' AND subCategory = '$subCategory'";
+  } elseif (!empty($categoryName)) {
+      $query = "SELECT * FROM products WHERE categoryName = '$categoryName'";
+  } elseif (!empty($subCategory)) {
+      $query = "SELECT * FROM products WHERE subcategory = '$subCategory'";
+  } else {
+    $query = "SELECT * FROM products";
+  }
 
 
 session_start();
@@ -67,6 +78,30 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
 
 ?>
 
+<!-- search script -->
+<script>
+  document.querySelector('.search-button').addEventListener('click', function(event) {
+  event.preventDefault();
+  
+  const searchInput = document.querySelector('#mySearch');
+  const searchTerm = searchInput.value;
+  
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        const productsContainer = document.querySelector('#products');
+        productsContainer.innerHTML = xhr.responseText;
+      } else {
+        console.error('Error: ' + xhr.status);
+      }
+    }
+  };
+  xhr.open('GET', 'search.php?q=' + searchTerm);
+  xhr.send();
+});
+</script>
+
 
 
 <!DOCTYPE html>
@@ -94,8 +129,9 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
 
         <!-- search bar -->
         <div class="navbar__search">
-          <form>
+          <form id="search-form">
             <div class="searchbar">
+              
               <input
                 type="search"
                 id="mySearch"
@@ -127,134 +163,104 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
         </section>
   
         <!-- Main -->
+
+</script>
+
         <section id="main">
           <div class="section__container">
 
           <div class="main__top-level">
             <?php
-              if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_array($result)) {
-                  echo '<div class="product__item">';
-                    // echo '<div class="product__img">';
+
+              
+
+              // $result = mysqli_query($connection, $query);
+
+              // while ($row = mysqli_fetch_assoc($result)) {
+              // // Output the product information as HTML
+              //   echo '<div class="product">';
+              //   echo '<h2>' . $row['product_name'] . '</h2>';
+                
+              //   echo '<p>Price: $' . $row['unit_price'] . '</p>';
+              //   echo '</div>';
+              // }
+
+
+
+            // main function
+              
+
+                // search function
+                  $searchTerm = $_GET['q'] ?? '';
+
+                if (!empty($searchTerm)) {
+                  $query = "SELECT * FROM products WHERE product_name LIKE '%$searchTerm%'";
+                  $result = mysqli_query($connection, $query);
+
+                  while ($row = mysqli_fetch_array($result)) {
+                    echo '<div class="product__item">';
                     echo '<img class="product__img" src="image/products/' . $row['product_id'] . '.jpg" alt="img" class="card-img-top card-image" >';
-                    // echo '</div>';
-                      echo '<div class="product__menu">';
-                        echo '<h4 class="card-title">' . $row['product_name'] . '</h4>';
-                        echo '<p class="card-price">' . $row['unit_price'] . '</p>';
-                        echo '<p class="card-text">' . 'Number of Stock: '. $row['in_stock'] . '</p>';
-                        if ($row['in_stock'] > 0) {
-                          echo '<form action="index.php" method="POST" class="item-form">';
-                          echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
-                          echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
-                          echo '<input type="text" value="1" name="count">';
-                          echo '<button type="submit" class="add-item">Add to Cart</button>';
-                          echo '</form>';
-                        } else {
-                          echo '<p class="card-text">Out of Stock</p>';
-                        }
-                        echo '<a href="item_details.php?id=' . $row['product_id'] . '" class="add-item">Product Details</a>';
+                      
+                        echo '<div class="product__menu">';
+                          echo '<h4 class="card-title">' . $row['product_name'] . '</h4>';
+                          echo '<p class="card-price">' . $row['unit_price'] . '</p>';
+                          echo '<p class="card-text">' . 'Number of Stock: '. $row['in_stock'] . '</p>';
+                          if ($row['in_stock'] > 0) {
+                            echo '<form action="index.php" method="POST" class="item-form">';
+                            echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
+                            echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
+                            echo '<input type="text" value="1" name="count">';
+                            echo '<button type="submit" class="add-item">Add to Cart</button>';
+                            echo '</form>';
+                          } else {
+                            echo '<p class="card-text">Out of Stock</p>';
+                          }
+                          echo '<a href="detail.php?id=' . $row['product_id'] . '" class="add-item">Product Details</a>';
+                        echo '</div>';
+                      
+                    echo '</div>';
+                  } 
+                } else {
+                  if (mysqli_num_rows($result) > 0) {  
+                
+                  $query = "SELECT * FROM products";
+                  $result = mysqli_query($connection, $query);
+
+                  while ($row = mysqli_fetch_array($result)) {
+                    echo '<div class="product__item">';
+                    echo '<img class="product__img" src="image/products/' . $row['product_id'] . '.jpg" alt="img" class="card-img-top card-image" >';
+                      
+                        echo '<div class="product__menu">';
+                          echo '<h4 class="card-title">' . $row['product_name'] . '</h4>';
+                          echo '<p class="card-price">' . $row['unit_price'] . '</p>';
+                          echo '<p class="card-text">' . 'Number of Stock: '. $row['in_stock'] . '</p>';
+                          if ($row['in_stock'] > 0) {
+                            echo '<form action="index.php" method="POST" class="item-form">';
+                            echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
+                            echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
+                            echo '<input type="text" value="1" name="count">';
+                            echo '<button type="submit" class="add-item">Add to Cart</button>';
+                            echo '</form>';
+                          } else {
+                            echo '<p class="card-text">Out of Stock</p>';
+                          }
+                          echo '<a href="detail.php?id=' . $row['product_id'] . '" class="add-item">Product Details</a>';
+                        echo '</div>';
                       echo '</div>';
-                    
-                  echo '</div>';
-                }
-
-              } else {
-                echo "No products found";
-
+                      } 
+                  } else {
+                    echo '<p> no result </p>';
+                  }
               }
+           
+
+              
+
+                
+              
               mysqli_close($connection);
             ?>
 
-
-
-
-
-
-            <!-- square image 1 -->
-            <div class="product" data-type="top-menu">
-              <img src="image/products/1000.jpg" class="product__img">
-              <div class="main__menu">
-                <button class="mside__top-menu-ite" data-filter="frozen">
-                  Frozen Food
-                </button>
-              </div>
-            </div>
-
-            <!-- Second level item -->
-            <div class="product invisible" data-type="frozen">
-              <img src="image/products/1004.jpg" class="product__img">
-              <div class="second__menu">
-                <button class="side__top-menu-item" data-filter="frozen-product">
-                  ICE Cream
-                </button>
-              </div>
-            </div>
-
-
-            <!-- third level item -->
-            <div class="product product__item" data-type="frozen-product">
-              <img src="image/products/1004.jpg" class="product__img" alt="icecream">
-              <div class="product__menu">
-                <h4 #item-name>ICE Cream</h4>
-                <p item-quantity>Quantity: 1L</p>
-                <p #item-price>Price: 1.80</p>
-                <form action='index.php' method="POST">
-                <button class="add-item" 
-                type="submit" onclick="addItemToCart()">Add</button>  
-              </div>
-            </div>
-
-            
-            <!-- square image 2 -->
-            <a href="http://www.google.com" class="product" target="blank" data-type="top-menu">
-                <img src="image/products/2000.jpg" class="product__img" alt="Youtube">
-
-
-                <div class="product__name">
-                  <h4>Fresh Food</h4>
-                </div>
-                <div class="product__description">
-                  <p>Very Fresh Food</p>
-              </div>
-            </a>
-
-            <!-- square image 3 -->
-            <a href="http://www.google.com" class="product" target="blank" data-type="top-menu">
-                <img src="image/products/3000.jpg" class="product__img" alt="Youtube">
-                  <div class="product__name">
-                    <h3>Beverages</h3>
-                  </div>
-                  <div class="product__description">
-                    <p>Are you thirsty?</p>
-                    <button class="side__top-menu-item" data-filter="beverage">Beverages</button>
-                </div>
-            </a>
-
-            <!-- square image 4 -->
-            <a href="http://www.google.com" class="product" target="blank" data-type="top-menu">
-                <img src="image/products/4000.jpg" class="product__img" alt="Youtube">
-
-                <div class="product__name">
-                  <h3>Home Health</h3>
-                </div>
-                <div class="product__description">
-                  <p>Please stay healthy</p>
-              </div>
-            </a>
-
-            <!-- square image 5 -->
-            <a href="http://www.google.com" class="product" target="blank" data-type="top-menu">
-                <img src="image/products/5000.jpg" class="product__img" alt="Youtube">
-
-
-                <div class="product__name">
-                  <h3>Pet Food</h3>
-                </div>
-                <div class="product__description">
-                  <p>MEeeeeowwww</p>
-              </div>
-
-            </a>            
         </div>
         </div>
 
@@ -266,7 +272,7 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
 
         <!-- Product Detail -->
         <div class="right">
-          <iframe name="view" src="checkout.php" frameborder=0 width="100%" height="400px"></iframe>
+          <iframe name="view" src="item_details.php" frameborder=0 width="100%" height="400px"></iframe>
         </div>
       </section>
 
