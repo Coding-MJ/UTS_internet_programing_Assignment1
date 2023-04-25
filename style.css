@@ -2,13 +2,13 @@
 /* Global */
 :root {
     /* Color */
-  --color-red: #d14e1d;
-  --color-black: #153c56;
-  --color-yellow:#e3a32c;
-  --color-beige: #f3ebd3;
-  --color-grey: #849290;
-  --color-green: #419d9a;
-  --color-pale-yellow: #ebcc80;
+  --color-red: #fe918d;
+  --color-black: #4d4d4d;
+  --color-yellow:#feb546;
+  --color-beige: #eeeeee;
+  --color-grey: #bdbdbd;
+  --color-green: #73aace;
+  --color-pale-yellow: #fff7d1;
   --color-pale-red: #e49f79;
   --color-pale-grey: #bac3b1;
 
@@ -163,47 +163,55 @@ button {
     
 }
 
-.side__top-menu-item.active {
+.category-btn.active {
     border: 1px solid var(--color-beige);
 }
 
-.side__top-menu-item:hover {
+.category-btn:hover {
     background-color: var(--color-green);
     border-radius: var(--size-border-radius);
 }
 
-.second-menu {
+.subcategories{
     display: none;
+
 }
 
-.second-menu.open {
+.subcategories.open {
     display: block;
 }
 
 
 /* Section Common */
 .section__container {
-    max-width: 1200px;
-    margin:auto;
+    /* max-width: 1200px; */
+    margin-top: 50px;
 }
 
 .container {
     padding-top: 55px;
     display: flex;
     justify-content: left;
-    margin: auto;
+    margin:auto;
 }
 
 #main {
-    margin-top: 150px;
+    margin-top: 18px;
     flex-basis: 55%;
     background-color: var(--color-beige);
 }
 
 #side {
-    margin-top: 150px;
+    margin-top: 18px;
     flex-basis: 15%;
-    background-color: var(--color-yellow);
+    background-color: var(--color-pale-yellow);
+}
+
+#detail {
+    margin-top: 18px;
+    /* width: 100%; */
+    flex-basis: 30%;
+    background-color: var(--color-beige);
 }
 
 #cart {
@@ -342,11 +350,10 @@ button {
     position: fixed;
     width: 100%;
     display: flex;
-    
-    justify-content: space-between;
+    justify-content: left;
     background-color: var(--color-red);
     align-items: center;
-    color: var(--color-red);
+    /* color: var(--color-red); */
     padding: 16px;
     bottom: 0%;
 }
@@ -393,8 +400,9 @@ button {
 
 .table, th, td {
     border: 1px solid var(--color-beige);
-    border-collapse: collapse;
+    /* border-collapse: collapse; */
     color: var(--color-beige);
+    width: 50%;
 }
 
 .empty-cart {

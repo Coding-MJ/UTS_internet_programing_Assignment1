@@ -1,3 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel='stylesheet' href='style.css'>
+        <script src="https://kit.fontawesome.com/e5ece60744.js" crossorigin="anonymous"></script>  
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+        <title>Market</title>  
+        <link rel="icon" type="image/png" href="image/favicon.png" />
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js" defer></script>        
+    </head>
+    
+    <body>
+
 <?php
 
 
@@ -45,12 +62,12 @@ echo '<input type="hidden" name="price" value="' . $row['unit_price'] . '">';
 
 // echo '<label class="margin2" for="quantity">Quantity:</label>';
 
-echo '<input type="number" name="quantity" id="quantity" value="1">';
+// echo '<input type="number" name="quantity" id="quantity" value="1">';
 
 echo '<p class="margin2"> The best '. $row['product_name'] . ' in the world</p>';
 
 // echo '<button type="submit" class="btn-sm btn-blue margin2">Add to Cart</button>';
- echo '</form>';
+echo '</form>';
 
 } else {
 
@@ -71,7 +88,7 @@ echo '<p class="margin2"> The best '. $row['product_name'] . ' in the world</p>'
 
 
 
- echo '<p>Product ID not specified.</p>';
+ echo '<p>product detail</p>';
 
 }
 
@@ -79,3 +96,6 @@ echo '<p class="margin2"> The best '. $row['product_name'] . ' in the world</p>'
 
 
 ?>
+
+    </body>
+</html>

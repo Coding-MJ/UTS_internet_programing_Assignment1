@@ -80,6 +80,12 @@ function updateQuantity(name, price) {
 
 <?php if(empty($products)): ?>
 	<p class="empty-cart">Your shopping cart is empty.</p>
+	<p class="empty-cart">Your shopping cart is empty.</p>
+	<p class="empty-cart">Your shopping cart is empty.</p>
+	<p class="empty-cart">Your shopping cart is empty.</p>
+	<p class="empty-cart">Your shopping cart is empty.</p>
+	<p class="empty-cart">Your shopping cart is empty.</p>
+	
 
 <?php else: ?>
 	<div class="cart__table">

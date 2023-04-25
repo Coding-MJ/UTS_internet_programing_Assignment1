@@ -55,8 +55,8 @@ workBtnContainer3.addEventListener('click', (e) => {
 
 // not working
 // When Side bar top menu clicked, Open the second level menu  
-const navbarToggleBtn = document.querySelector('.side__top-menu');
-const secondMenu = document.querySelector('.second-menu');
+const navbarToggleBtn = document.querySelector('.category-btn');
+const secondMenu = document.querySelector('.subcategories');
 navbarToggleBtn.addEventListener('click', ()=> {
     secondMenu.classList.toggle('open');
 });
@@ -64,6 +64,7 @@ navbarToggleBtn.addEventListener('click', ()=> {
 // not working
 // add item to cart
 function addItemToCart() {
+    
     var itemName = document.getElementById("item-name").innerHTML;
     var itemPrice = document.getElementById("item-price").innerHTML;
     var itemQuantity = document.getElementById("item-quantity").value;

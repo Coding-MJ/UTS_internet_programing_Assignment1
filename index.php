@@ -234,7 +234,7 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
   
         <!-- Main -->
 
-</script>
+       </script>
 
         <section id="main">
           <div class="section__container">
@@ -299,7 +299,7 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
                             echo '<p class="card-text">Out of Stock</p>';
                           }
                           echo '<a href="item_details.php?id=' . $row['product_id'] . '" target="view" class="add-item">Product Details</a>';
-// 여기부터
+
                         echo '</div>';
                       echo '</div>';
                       } 
@@ -318,20 +318,16 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
 
         </div>
         </div>
-
-        </section>
+      </section>
 
 
 
 
 
         <!-- Product Detail -->
-      <section id="detail">
-        <div class="right">
-          <iframe name="view" src="item_details.php" frameborder=0 width="100%" height="80%"></iframe>
-        </div>
+        <section id="detail">
+          <iframe name="view" src="item_details.php" frameborder=0 width="80%" height="80%"></iframe>
         </section>
-      </section>
 
       <!-- Shopping Cart -->      
       <section id="cart">
