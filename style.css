@@ -111,6 +111,7 @@ button {
     align-items: center;
     color: var(--color-beige);
     padding: 16px;
+    z-index: 1;
 }
 
 
