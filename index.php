@@ -196,7 +196,7 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
       <section class="container">
         <!-- Side bar -->  
         <section id="side">
-        <?php
+         <?php
         if (!empty($categoryName) && !empty($subCategory)) {
           $query = "SELECT * FROM products WHERE category_name = '$categoryName' AND subcategory_name = '$subCategory'";
           } elseif (!empty($categoryName)) {
@@ -268,7 +268,7 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
                           } else {
                             echo '<p class="card-text">Out of Stock</p>';
                           }
-                          echo '<a href="item_details.php?id=' . $row['product_id'] . '" class="add-item">Product Details</a>';
+                          echo '<a href="item_details.php?id=' . $row['product_id'] . '" target="view" class="add-item">Product Details</a>';
                         echo '</div>';
                       
                     echo '</div>';
