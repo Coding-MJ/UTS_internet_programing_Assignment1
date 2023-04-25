@@ -195,11 +195,13 @@ button {
 }
 
 #main {
+    margin-top: 150px;
     flex-basis: 55%;
     background-color: var(--color-beige);
 }
 
 #side {
+    margin-top: 150px;
     flex-basis: 15%;
     background-color: var(--color-yellow);
 }
@@ -215,6 +217,7 @@ button {
     display: flex;
     flex-wrap: wrap; 
     justify-content:left;
+    margin-top: 100px;
     margin: 12px;
 }
 
@@ -407,3 +410,16 @@ button {
     align-content: center;
     margin: auto;
 }
+
+
+.right {
+    display: flex;
+    margin-top: 100px;
+    /* justify-content: baseline; */
+    background-color: var(--color-red);
+    /* align-items: center; */
+    color: var(--color-beige);
+    padding: 16px;
+}
+
+

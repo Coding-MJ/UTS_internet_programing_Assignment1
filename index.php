@@ -11,6 +11,7 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
 foreach($products as $name => $product){
   $subtotal = (int)$product['unit_price']*(int)$product['count'];
   $total += $subtotal;
+
   }
 
 if (mysqli_connect_errno()) {
@@ -73,7 +74,11 @@ if($name!=''&&$count!=''&&$unit_price!=''){
 }
 
 $products = isset($_SESSION['products'])? $_SESSION['products']:[];
-$products = isset($_SESSION['products'])? $_SESSION['products']:[];
+
+
+
+
+
 
 
 ?>
@@ -102,7 +107,51 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
 });
 </script>
 
+<!-- side bar -->
+<script>
+  const topLevelItems = document.querySelectorAll('.main__top-level-item');
+  topLevelItems.forEach(function(topLevelItem) {
+    topLevelItem.addEventListener('click', function() {
+      const categoryName = topLevelItem.textContent;
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            const mainSection = document.querySelector('#main');
+            mainSection.innerHTML = xhr.responseText;
+          } else {
+            console.error('Error: ' + xhr.status);
+          }
+        }
+      };
+      xhr.open('GET', 'category.php?category_name=' + categoryName);
+      xhr.send();
+    });
+  });
+</script>
+<!-- Expanded Sidebar -->
+<script>
+  const subMenuItems = document.querySelectorAll('.main__sub-menu-item');
 
+  subMenuItems.forEach(function(subMenuItem) {
+    subMenuItem.addEventListener('click', function() {
+      const subcategoryName = subMenuItem.textContent;
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            const mainSection = document.querySelector('#main');
+            mainSection.innerHTML = xhr.responseText;
+          } else {
+            console.error('Error: ' + xhr.status);
+          }
+        }
+      };
+      xhr.open('GET', 'subcategory.php?subcategory_name=' + subcategoryName);
+      xhr.send();
+    });
+  });
+</script> 
 
 <!DOCTYPE html>
 <html>
@@ -147,19 +196,40 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
       <section class="container">
         <!-- Side bar -->  
         <section id="side">
-        <!-- Navbar top level menu -->
-        <div class="side__menu">
-          <ul class="side__top-menu">
-            <button class="side__top-menu-item" data-filter="top-menu"> Home </button>
-            <button class="side__top-menu-item frozenFood" data-filter="frozen" >Frozen Food</button>
-            <button class="side__top-menu-item second-menu" data-filter="frozen-product">ICE Cream</button>
-            <button class="side__top-menu-item" data-filter="fresh">Fresh Food</button>
-            <button class="side__top-menu-item" data-filter="beverage">Beverages</button>
-            <button class="side__top-menu-item" data-filter="health">Home Health</button>
-            <button class="side__top-menu-item"data-filter="pet">Pet Food</button>
-          </ul>
-        </div>
-  
+        <?php
+        if (!empty($categoryName) && !empty($subCategory)) {
+          $query = "SELECT * FROM products WHERE category_name = '$categoryName' AND subcategory_name = '$subCategory'";
+          } elseif (!empty($categoryName)) {
+              $query = "SELECT * FROM products WHERE subcategory_name = '$categoryName'";
+          } elseif (!empty($subCategory)) {
+              $query = "SELECT * FROM products WHERE subcategory_name = '$subCategory'";
+          } else {
+            $query = "SELECT * FROM products";
+          }
+          ?>
+          <!-- Navbar top level menu -->
+            <div class="side__menu">
+              <?php
+              // Get all categories
+              $query = "SELECT DISTINCT category_name FROM products";
+              $result = mysqli_query($connection, $query);
+              while ($row = mysqli_fetch_assoc($result)) {
+                  $category_name = $row['category_name'];
+                  // Get all subcategories for this category
+                  $query = "SELECT DISTINCT subcategory_name FROM products WHERE category_name='$category_name'";
+                  $sub_result = mysqli_query($connection, $query);
+                  $has_subcategories = mysqli_num_rows($sub_result) > 0;
+                  ?>
+                  <button class="category-btn <?php if ($has_subcategories) echo 'has-subcategories'; ?>"><?php echo $category_name; ?></button>
+                  <?php if ($has_subcategories) { ?>
+                      <div class="subcategories">
+                          <?php while ($sub_row = mysqli_fetch_assoc($sub_result)) { ?>
+                              <a href="index.php?subcategory_name=<?php echo $sub_row['subcategory_name']; ?>"><?php echo $sub_row['subcategory_name']; ?></a>
+                          <?php } ?>
+                      </div>
+                  <?php } ?>
+              <?php } ?>
+          </div>          
         </section>
   
         <!-- Main -->
@@ -171,23 +241,6 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
 
           <div class="main__top-level">
             <?php
-
-              
-
-              // $result = mysqli_query($connection, $query);
-
-              // while ($row = mysqli_fetch_assoc($result)) {
-              // // Output the product information as HTML
-              //   echo '<div class="product">';
-              //   echo '<h2>' . $row['product_name'] . '</h2>';
-                
-              //   echo '<p>Price: $' . $row['unit_price'] . '</p>';
-              //   echo '</div>';
-              // }
-
-
-
-            // main function
               
 
                 // search function
@@ -215,7 +268,7 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
                           } else {
                             echo '<p class="card-text">Out of Stock</p>';
                           }
-                          echo '<a href="detail.php?id=' . $row['product_id'] . '" class="add-item">Product Details</a>';
+                          echo '<a href="item_details.php?id=' . $row['product_id'] . '" class="add-item">Product Details</a>';
                         echo '</div>';
                       
                     echo '</div>';
@@ -238,13 +291,15 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
                             echo '<form action="index.php" method="POST" class="item-form">';
                             echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
                             echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
+                            echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
                             echo '<input type="text" value="1" name="count">';
                             echo '<button type="submit" class="add-item">Add to Cart</button>';
                             echo '</form>';
                           } else {
                             echo '<p class="card-text">Out of Stock</p>';
                           }
-                          echo '<a href="detail.php?id=' . $row['product_id'] . '" class="add-item">Product Details</a>';
+                          echo '<a href="item_details.php?id=' . $row['product_id'] . '" target="view" class="add-item">Product Details</a>';
+// 여기부터
                         echo '</div>';
                       echo '</div>';
                       } 
@@ -271,9 +326,11 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
 
 
         <!-- Product Detail -->
+      <section id="detail">
         <div class="right">
-          <iframe name="view" src="item_details.php" frameborder=0 width="100%" height="400px"></iframe>
+          <iframe name="view" src="item_details.php" frameborder=0 width="100%" height="80%"></iframe>
         </div>
+        </section>
       </section>
 
       <!-- Shopping Cart -->      

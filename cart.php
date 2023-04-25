@@ -122,7 +122,6 @@ function updateQuantity(name, price) {
 
 		<div class="cart-btn">
 			<button type="button" class="checkout-btn" onclick="location.href='checkout.php'" onsubmit="return validateQuantity();" <?php if(empty($products)) echo 'disabled="disabled"'; ?>>Checkout</button>
-			<!-- <button type="button" class="btn btn-success" onclick="location.href='index.php'">Continue Shopping</button> -->
 		</div>
 	</div>
 	</div>

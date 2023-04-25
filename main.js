@@ -85,3 +85,7 @@ function addItemToCart() {
       window.location.href = `item_details.php?id=${productId}`;
     });
   });
+
+
+
+  

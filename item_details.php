@@ -6,10 +6,11 @@
 if (isset($_GET['id'])) {
  $id = $_GET['id'];
 
+ $connection = mysqli_connect('localhost:3309', 'root', '', 'assignment'); // servername, username, password, db_name
 
 
 
-$query = "SELECT * FROM products WHERE id = $id";
+$query = "SELECT * FROM products WHERE product_id = $id";
 
 $result = mysqli_query($connection, $query);
 
@@ -20,35 +21,35 @@ $result = mysqli_query($connection, $query);
 if (mysqli_num_rows($result) > 0) {
 
 $row = mysqli_fetch_array($result);
-echo '<h2 class="margin1">' . $row['productName'] . '</h2>';
-echo '<img src="images/' . $row['productName'] . '.png" alt="img">';
+echo '<h2 class="margin1">' . $row['product_name'] . '</h2>';
+echo '<img src="image/products/' . $row['product_id'] . '.jpg" alt="img">';
 
-echo '<p class="margin2">$' . $row['price'] . ' per item</p>';
+echo '<p class="margin2">$' . $row['unit_price'] . ' per item</p>';
 
-echo '<p class="margin2">Number of Stock: ' . $row['stock'] . '</p>';
+echo '<p class="margin2">Number of Stock: ' . $row['in_stock'] . '</p>';
 
 
 
 
 // Check if the product is in stock
 // Display the add-to-cart form
-if ($row['stock'] > 0) {
+if ($row['in_stock'] > 0) {
 
 
 
 echo '<form action="index.php" method="POST">';
 
-echo '<input type="hidden" name="productName" value="' . $row['productName'] . '">';
+echo '<input type="hidden" name="productName" value="' . $row['product_name'] . '">';
 
-echo '<input type="hidden" name="price" value="' . $row['price'] . '">';
+echo '<input type="hidden" name="price" value="' . $row['unit_price'] . '">';
 
-echo '<label class="margin2" for="quantity">Quantity:</label>';
+// echo '<label class="margin2" for="quantity">Quantity:</label>';
 
 echo '<input type="number" name="quantity" id="quantity" value="1">';
 
-echo '<p class="margin2"> The product from Australia </p>';
+echo '<p class="margin2"> The best '. $row['product_name'] . ' in the world</p>';
 
-echo '<button type="submit" class="btn-sm btn-blue margin2">Add to Cart</button>';
+// echo '<button type="submit" class="btn-sm btn-blue margin2">Add to Cart</button>';
  echo '</form>';
 
 } else {
