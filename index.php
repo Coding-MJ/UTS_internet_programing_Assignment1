@@ -218,7 +218,7 @@ document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
                     </ul>
                   </li>
                   <li class="nav-item has-submenu">
-                    <a class="nav-link" href="#">fresh<i class="bi small bi-caret-down-fill"></i> </a>
+                    <a class="nav-link" href="#"> fresh <i class="bi small bi-caret-down-fill"></i> </a>
                     <ul class="submenu collapse">
                       <li><a class="nav-link" href="index.php?q=Cheddar+Cheese">Cheese</a></li>
                         <li><a class="nav-link" href="index.php?q=T+Bone+Steak">Steak</a></li>
@@ -230,7 +230,7 @@ document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
                     </ul>
                   </li>
                   <li class="nav-item has-submenu">
-                    <a class="nav-link" href="#">beverage<i class="bi small bi-caret-down-fill"></i> </a>
+                    <a class="nav-link" href="#"> beverage <i class="bi small bi-caret-down-fill"></i> </a>
                     <ul class="submenu collapse">
                       <li><a class="nav-link" href="index.php?q=Earl+Grey+Tea+Bags">Tea</a></li>
                         <li><a class="nav-link" href="index.php?q=Instant+Coffee">Coffee</a></li>
@@ -238,7 +238,7 @@ document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
                     </ul>
                   </li>
                   <li class="nav-item has-submenu">
-                    <a class="nav-link" href="#">pet<i class="bi small bi-caret-down-fill"></i> </a>
+                    <a class="nav-link" href="#"> pet <i class="bi small bi-caret-down-fill"></i> </a>
                     <ul class="submenu collapse">
                       <li><a class="nav-link" href="index.php?q=Dry+Dog+Food">Dog</a></li>
                         <li><a class="nav-link" href="index.php?q=Bird">Bird</a></li>
@@ -248,8 +248,6 @@ document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
                   </li>
                 </ul>
                 </nav>
-
-
             </div>          
         </section>
 
@@ -278,7 +276,8 @@ document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
                       
                         echo '<div class="product__menu">';
                           echo '<h4 class="card-title">' . $row['product_name'] . '</h4>';
-                          echo '<p class="card-price">' . $row['unit_price'] . '</p>';
+                          echo '<p class="card-price">' . '$'. $row['unit_price'] . '</p>';
+                          echo '<p class="card-price">' . $row['unit_quantity'] . '</p>';
                           echo '<p class="card-text">' . 'Number of Stock: '. $row['in_stock'] . '</p>';
                           if ($row['in_stock'] > 0) {
                             echo '<form action="index.php" method="POST" class="item-form">';
@@ -307,7 +306,8 @@ document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
                       
                         echo '<div class="product__menu">';
                           echo '<h4 class="card-title">' . $row['product_name'] . '</h4>';
-                          echo '<p class="card-price">' . $row['unit_price'] . '</p>';
+                          echo '<p class="card-price">' . '$'. $row['unit_price'] . '</p>';
+                          echo '<p class="card-price">' . $row['unit_quantity'] . '</p>';
                           echo '<p class="card-text">' . 'Number of Stock: '. $row['in_stock'] . '</p>';
                           if ($row['in_stock'] > 0) {
                             echo '<form action="index.php" method="POST" class="item-form">';
