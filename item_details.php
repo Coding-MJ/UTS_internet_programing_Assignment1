@@ -38,8 +38,9 @@ $result = mysqli_query($connection, $query);
 if (mysqli_num_rows($result) > 0) {
 
 $row = mysqli_fetch_array($result);
+echo '<div class="product__detail_item">';
 echo '<h2 class="margin1">' . $row['product_name'] . '</h2>';
-echo '<img src="image/products/' . $row['product_id'] . '.jpg" alt="img">';
+echo '<img src="image/products/' . $row['product_id'] . '.jpg" alt="img" class="product__detail_img" >';
 
 echo '<p class="margin2">$' . $row['unit_price'] . ' per item</p>';
 
@@ -69,6 +70,7 @@ echo '<p class="margin2"> The best '. $row['product_name'] . ' in the world</p>'
 // echo '<button type="submit" class="btn-sm btn-blue margin2">Add to Cart</button>';
 echo '</form>';
 
+
 } else {
 
 
@@ -88,7 +90,7 @@ echo '</form>';
 
 
 
- echo '<p>product detail</p>';
+//  echo '<p>product detail</p>';
 
 }
 

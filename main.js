@@ -55,11 +55,12 @@ workBtnContainer3.addEventListener('click', (e) => {
 
 // not working
 // When Side bar top menu clicked, Open the second level menu  
-const navbarToggleBtn = document.querySelector('.category-btn');
+const navbarToggleBtn = document.querySelector('.category-btn.has-subcategories');
 const secondMenu = document.querySelector('.subcategories');
 navbarToggleBtn.addEventListener('click', ()=> {
-    secondMenu.classList.toggle('open');
+    secondMenu.classList.add('open');
 });
+
 
 // not working
 // add item to cart
