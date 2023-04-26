@@ -10,14 +10,15 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
 
 
 foreach($products as $name => $product){
-	$subtotal = (int)$product['unit_price']*(int)$product['count'];
+	$subtotal = (double)$product['unit_price']*(double)$product['count'];
 	$total += $subtotal;
 }
 
 $name = isset($_POST['product_name'])? htmlspecialchars($_POST['product_name'], ENT_QUOTES, 'utf-8') : '';
 $price = isset($_POST['unit_price'])? htmlspecialchars($_POST['unit_price'], ENT_QUOTES, 'utf-8') : '';
 $count = isset($_POST['count'])? htmlspecialchars($_POST['count'], ENT_QUOTES, 'utf-8') : '';
-
+$id = isset($_POST['product_id'])? htmlspecialchars($_POST['product_id'], ENT_QUOTES, 'utf-8') : '';
+$quantity = isset($_POST['unit_quantity'])? htmlspecialchars($_POST['unit_quantity'], ENT_QUOTES, 'utf-8') : '';
 ?>
 
 
@@ -27,7 +28,7 @@ if(isset($_SESSION['products'])){
 	$products = $_SESSION['products'];
 	foreach($products as $key => $product){
  		if($key == $name){ 
-			$count = (int)$count + (int)$product['count'];
+			$count = (double)$count + (double)$product['count'];
 		}
 	}
 }
