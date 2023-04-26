@@ -196,45 +196,55 @@ document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
               <nav class="sidebar card py-2 mb-4">
                 <ul class="nav flex-column" id="nav_accordion">
                   <li class="nav-item">
-                    <a class="nav-link" href="#"> Link name </a>
+                    <a class="nav-link" href="index.php"> All </a>
                   </li>
                   <li class="nav-item has-submenu">
-                    <a class="nav-link" href="#"> Submenu links <i class="bi small bi-caret-down-fill"></i> </a>
+                    <a class="nav-link" href="#"> Frozen <i class="bi small bi-caret-down-fill"></i> </a>
                     <ul class="submenu collapse">
-                      <li><a class="nav-link" href="#">Submenu item 1 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 2 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 3 </a> </li>
+                      <li><a class="nav-link" href="index.php?q=Fish+Finger">Fish Finger </a></li>
+                        <li><a class="nav-link" href="index.php?q=Hamburger+Patties">Hamburger Patty </a></li>
+                        <li><a class="nav-link" href="index.php?q=Shelled+Prawns">Shelled Prawns</a> </li>
+                        <li><a class="nav-link" href="index.php?q=Tub+Ice+Cream">Tub Ice Cream</a> </li>
                     </ul>
                   </li>
                   <li class="nav-item has-submenu">
-                    <a class="nav-link" href="#"> More menus <i class="bi small bi-caret-down-fill"></i> </a>
+                    <a class="nav-link" href="#"> health <i class="bi small bi-caret-down-fill"></i> </a>
                     <ul class="submenu collapse">
-                      <li><a class="nav-link" href="#">Submenu item 4 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 5 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 6 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 7 </a></li>
+                      <li><a class="nav-link" href="index.php?q=Panadol">Panadol</a></li>
+                        <li><a class="nav-link" href="index.php?q=Bath+Soap">Bath Soap</a></li>
+                        <li><a class="nav-link" href="index.php?q=Garbage+Bags">Garbage Bags</a></li>
+                        <li><a class="nav-link" href="index.php?q=Washing+Powder">Washing Powder</a></li>
+                        <li><a class="nav-link" href="index.php?q=Laundry+Bleach">Laundry Bleach</a></li>
                     </ul>
                   </li>
                   <li class="nav-item has-submenu">
-                    <a class="nav-link" href="#"> Another submenus <i class="bi small bi-caret-down-fill"></i> </a>
+                    <a class="nav-link" href="#">fresh<i class="bi small bi-caret-down-fill"></i> </a>
                     <ul class="submenu collapse">
-                      <li><a class="nav-link" href="#">Submenu item 8 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 9 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 10 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 11 </a></li>
+                      <li><a class="nav-link" href="index.php?q=Cheddar+Cheese">Cheese</a></li>
+                        <li><a class="nav-link" href="index.php?q=T+Bone+Steak">Steak</a></li>
+                        <li><a class="nav-link" href="index.php?q=Navel+Oranges">Oranges</a></li>
+                        <li><a class="nav-link" href="index.php?q=Bananas">Bananas</a></li>
+                        <li><a class="nav-link" href="index.php?q=Peaches">Peaches</a></li>
+                        <li><a class="nav-link" href="index.php?q=Grapes">Grapes</a></li>
+                        <li><a class="nav-link" href="index.php?q=Apples">Apples</a></li>
                     </ul>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#"> Demo link </a>
+                  <li class="nav-item has-submenu">
+                    <a class="nav-link" href="#">beverage<i class="bi small bi-caret-down-fill"></i> </a>
+                    <ul class="submenu collapse">
+                      <li><a class="nav-link" href="index.php?q=Earl+Grey+Tea+Bags">Tea</a></li>
+                        <li><a class="nav-link" href="index.php?q=Instant+Coffee">Coffee</a></li>
+                        <li><a class="nav-link" href="index.php?q=Chocolate+Bar">Chocolate</a></li>
+                    </ul>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#"> Menu item </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#"> Something </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#"> Other link </a>
+                  <li class="nav-item has-submenu">
+                    <a class="nav-link" href="#">pet<i class="bi small bi-caret-down-fill"></i> </a>
+                    <ul class="submenu collapse">
+                      <li><a class="nav-link" href="index.php?q=Dry+Dog+Food">Dog</a></li>
+                        <li><a class="nav-link" href="index.php?q=Bird">Bird</a></li>
+                        <li><a class="nav-link" href="index.php?q=Cat">Cat</a></li>
+                        <li><a class="nav-link" href="index.php?q=Fish+Food">Fish</a></li>
+                    </ul>
                   </li>
                 </ul>
                 </nav>
@@ -338,12 +348,12 @@ document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
 
         <!-- Product Detail -->
         <section id="detail">
-          <iframe name="view" src="item_details.php" frameborder=0 width="80%" height="80%"></iframe>
+          <iframe name="view" src="item_details.php" frameborder=0 width="100%" height="100%"></iframe>
         </section>
 
       <!-- Shopping Cart -->      
       <section id="cart">
-        <iframe name="view" src="cart.php" frameborder=0 width="100%" height="50%"></iframe>
+        <iframe name="view" src="cart.php" frameborder=0 width="100%" height="100%"></iframe>
       </section>  
     </section>
     </body>
