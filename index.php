@@ -109,49 +109,40 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
 
 <!-- side bar -->
 <script>
-  const topLevelItems = document.querySelectorAll('.main__top-level-item');
-  topLevelItems.forEach(function(topLevelItem) {
-    topLevelItem.addEventListener('click', function() {
-      const categoryName = topLevelItem.textContent;
-      const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-            const mainSection = document.querySelector('#main');
-            mainSection.innerHTML = xhr.responseText;
-          } else {
-            console.error('Error: ' + xhr.status);
-          }
-        }
-      };
-      xhr.open('GET', 'category.php?category_name=' + categoryName);
-      xhr.send();
-    });
-  });
-</script>
-<!-- Expanded Sidebar -->
-<script>
-  const subMenuItems = document.querySelectorAll('.main__sub-menu-item');
+	document.addEventListener("DOMContentLoaded", function(){
 
-  subMenuItems.forEach(function(subMenuItem) {
-    subMenuItem.addEventListener('click', function() {
-      const subcategoryName = subMenuItem.textContent;
-      const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-            const mainSection = document.querySelector('#main');
-            mainSection.innerHTML = xhr.responseText;
-          } else {
-            console.error('Error: ' + xhr.status);
-          }
+document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
+
+  element.addEventListener('click', function (e) {
+
+    let nextEl = element.nextElementSibling;
+    let parentEl  = element.parentElement;	
+
+    if(nextEl) {
+      e.preventDefault();	
+      let mycollapse = new bootstrap.Collapse(nextEl);
+
+        if(nextEl.classList.contains('show')){
+          mycollapse.hide();
+        } else {
+          mycollapse.show();
+          // find other submenus with class=show
+          var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+          // if it exists, then close all of them
+        if(opened_submenu){
+          new bootstrap.Collapse(opened_submenu);
         }
-      };
-      xhr.open('GET', 'subcategory.php?subcategory_name=' + subcategoryName);
-      xhr.send();
-    });
+
+        }
+      }
+
   });
-</script> 
+})
+
+}); 
+</script>
+
+ 
 
 <!DOCTYPE html>
 <html>
@@ -165,7 +156,10 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
         <title>Market</title>  
         <link rel="icon" type="image/png" href="image/favicon.png" />
         <link rel="stylesheet" href="style.css">
-        <script src="main.js" defer></script>        
+        <script src="main.js" defer></script> 
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     </head>
     
     <body>
@@ -193,49 +187,67 @@ $products = isset($_SESSION['products'])? $_SESSION['products']:[];
       </nav>
 
       <!-- container -->
-      <section class="container">
+      <section class="main__view">
         <!-- Side bar -->  
         <section id="side">
-         <?php
-        if (!empty($categoryName) && !empty($subCategory)) {
-          $query = "SELECT * FROM products WHERE category_name = '$categoryName' AND subcategory_name = '$subCategory'";
-          } elseif (!empty($categoryName)) {
-              $query = "SELECT * FROM products WHERE subcategory_name = '$categoryName'";
-          } elseif (!empty($subCategory)) {
-              $query = "SELECT * FROM products WHERE subcategory_name = '$subCategory'";
-          } else {
-            $query = "SELECT * FROM products";
-          }
-          ?>
           <!-- Navbar top level menu -->
             <div class="side__menu">
-              <?php
-              // Get all categories
-              $query = "SELECT DISTINCT category_name FROM products";
-              $result = mysqli_query($connection, $query);
-              while ($row = mysqli_fetch_assoc($result)) {
-                  $category_name = $row['category_name'];
-                  // Get all subcategories for this category
-                  $query = "SELECT DISTINCT subcategory_name FROM products WHERE category_name='$category_name'";
-                  $sub_result = mysqli_query($connection, $query);
-                  $has_subcategories = mysqli_num_rows($sub_result) > 0;
-                  ?>
-                  <button class="category-btn <?php if ($has_subcategories) echo 'has-subcategories'; ?>"><?php echo $category_name; ?></button>
-                  <?php if ($has_subcategories) { ?>
-                      <div class="subcategories">
-                          <?php while ($sub_row = mysqli_fetch_assoc($sub_result)) { ?>
-                              <a href="index.php?subcategory_name=<?php echo $sub_row['subcategory_name']; ?>"><?php echo $sub_row['subcategory_name']; ?></a>
-                          <?php } ?>
-                      </div>
-                  <?php } ?>
-              <?php } ?>
-          </div>          
+
+              <nav class="sidebar card py-2 mb-4">
+                <ul class="nav flex-column" id="nav_accordion">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> Link name </a>
+                  </li>
+                  <li class="nav-item has-submenu">
+                    <a class="nav-link" href="#"> Submenu links <i class="bi small bi-caret-down-fill"></i> </a>
+                    <ul class="submenu collapse">
+                      <li><a class="nav-link" href="#">Submenu item 1 </a></li>
+                        <li><a class="nav-link" href="#">Submenu item 2 </a></li>
+                        <li><a class="nav-link" href="#">Submenu item 3 </a> </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item has-submenu">
+                    <a class="nav-link" href="#"> More menus <i class="bi small bi-caret-down-fill"></i> </a>
+                    <ul class="submenu collapse">
+                      <li><a class="nav-link" href="#">Submenu item 4 </a></li>
+                        <li><a class="nav-link" href="#">Submenu item 5 </a></li>
+                        <li><a class="nav-link" href="#">Submenu item 6 </a></li>
+                        <li><a class="nav-link" href="#">Submenu item 7 </a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item has-submenu">
+                    <a class="nav-link" href="#"> Another submenus <i class="bi small bi-caret-down-fill"></i> </a>
+                    <ul class="submenu collapse">
+                      <li><a class="nav-link" href="#">Submenu item 8 </a></li>
+                        <li><a class="nav-link" href="#">Submenu item 9 </a></li>
+                        <li><a class="nav-link" href="#">Submenu item 10 </a></li>
+                        <li><a class="nav-link" href="#">Submenu item 11 </a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> Demo link </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> Menu item </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> Something </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> Other link </a>
+                  </li>
+                </ul>
+                </nav>
+
+
+            </div>          
         </section>
-  
+
+        
+
+
+
         <!-- Main -->
-
-       </script>
-
         <section id="main">
           <div class="section__container">
 
