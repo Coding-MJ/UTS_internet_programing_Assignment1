@@ -1,21 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Order Sheet</title>
-	<script>
-		function validateForm() {
-			var name = document.forms["orderForm"]["name"].value;
-			var address = document.forms["orderForm"]["address"].value;
-			var suburb = document.forms["orderForm"]["suburb"].value;
-			var state = document.forms["orderForm"]["state"].value;
-			var country = document.forms["orderForm"]["country"].value;
-			var email = document.forms["orderForm"]["email"].value;
-			if (name == "" || address == "" || suburb == "" || state == "" || country == "" || email == "") {
-				alert("Please fill out all required fields");
-				return false;
-			}
+	<head>
+		<meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel='stylesheet' href='style.css'>
+        <script src="https://kit.fontawesome.com/e5ece60744.js" crossorigin="anonymous"></script>  
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+        <title>Order Sheet</title> 
+        <link rel="icon" type="image/png" href="image/favicon.png" />
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js" defer></script> 
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+	
+		<script>
+	function validateForm() {
+		var name = document.forms["orderForm"]["name"].value;
+		var address = document.forms["orderForm"]["address"].value;
+		var suburb = document.forms["orderForm"]["suburb"].value;
+		var state = document.forms["orderForm"]["state"].value;
+		var country = document.forms["orderForm"]["country"].value;
+		var email = document.forms["orderForm"]["email"].value;
+		var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // email regular expression
+		if (name == "" || address == "" || suburb == "" || state == "" || country == "" || email == "") {
+			alert("Please fill out all required fields");
+			return false;
 		}
-	</script>
+		else if (!emailRegex.test(email)) { // check if email is in valid format
+			alert("Please enter a valid email address");
+			return false;
+		}
+	}
+</script>
+
 </head>
 <body>
 	<h1>Order Sheet</h1>
