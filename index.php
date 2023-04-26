@@ -283,6 +283,8 @@ document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
                             echo '<form action="index.php" method="POST" class="item-form">';
                             echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
                             echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
+                            echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
+                            echo '<input type="hidden" name="unit_quantity" value="' . $row['unit_quantity'] . '">';
                             echo '<input type="text" value="1" name="count">';
                             echo '<button type="submit" class="add-item">Add to Cart</button>';
                             echo '</form>';
@@ -314,6 +316,7 @@ document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
                             echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
                             echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
                             echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
+                            echo '<input type="hidden" name="unit_quantity" value="' . $row['unit_quantity'] . '">';
                             echo '<input type="text" value="1" name="count">';
                             echo '<button type="submit" class="add-item">Add to Cart</button>';
                             echo '</form>';

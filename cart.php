@@ -2,8 +2,13 @@
 session_start();
 
 $delete_name = isset($_POST['delete_name'])? htmlspecialchars($_POST['delete_name'], ENT_QUOTES, 'utf-8') : '';
+$empty_cart = isset($_POST['empty_cart']);
+
 
 if($delete_name != '') unset($_SESSION['products'][$delete_name]);
+// if($empty_cart) unset($_SESSION['products']);
+if(isset($_POST['empty_cart'])) unset($_SESSION['products']);
+
 
 $total = 0;
 $products = isset($_SESSION['products'])? $_SESSION['products']:[];
@@ -125,7 +130,7 @@ function updateQuantity(name, price) {
 				
 
 		<div class="cart-btn">
-			<button type="button" class="checkout-btn" onclick="location.href='checkout.php'" onsubmit="return validateQuantity();" <?php if(empty($products)) echo 'disabled="disabled"'; ?>>Checkout</button>
+			<button type="button" class="checkout-btn" onclick="window.open('checkout.php', '_blank')" onsubmit="return validateQuantity();" <?php if(empty($products)) echo 'disabled="disabled"'; ?>>Checkout</button>
 		</div>
 	</div>
 	</div>
