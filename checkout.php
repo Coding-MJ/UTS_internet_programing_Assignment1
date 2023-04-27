@@ -36,37 +36,83 @@
 </script>
 
 </head>
+    
 <body>
+    <section class="all">
+      <!-- Navbar -->
+      <nav id="navbar">
+        <div class="navbar__logo">
+          <a href="index.php"><i class="fa-solid fa-cart-shopping"></i> Market</a>
+        </div>
+
+        <!-- search bar -->
+        <div class="navbar__search">
+          <form id="search-form">
+            <div class="searchbar">
+              
+              <input
+                type="search"
+                id="mySearch"
+                name="q"
+                placeholder="Search the site…" />
+              <button class="search-button">Search</button>
+            </div>
+          </form>
+        </div>
+      </nav>
+
+      <!-- container -->
+      <section class="main__view">
+        <!-- Side bar -->  
+        <section id="side">
+          <!-- Navbar top level menu -->
+            <div class="side__menu">
+
+            </div>          
+        </section>
+
+
+
+        <!-- Main -->
+        <section id="main">
+          <div class="section__container">
+	<div class="checkout__form">
 	<h1>Order Sheet</h1>
 	<form name="orderForm" action="processOrder.php" onsubmit="return validateForm()" method="post">
 		<table>
 			<tr>
-				<td>Name:</td>
+				<td class="checkout-text">Name:</td>
 				<td><input type="text" name="name"></td>
 			</tr>
 			<tr>
-				<td>Address:</td>
+				<td class="checkout-text">Email:</td>
+				<td><input type="text" name="email"></td>
+			</tr>
+			<tr>
+				<td class="checkout-text">Address:</td>
 				<td><input type="text" name="address"></td>
 			</tr>
 			<tr>
-				<td>Suburb:</td>
+				<td class="checkout-text">Suburb:</td>
 				<td><input type="text" name="suburb"></td>
 			</tr>
 			<tr>
-				<td>State:</td>
+				<td class="checkout-text">State:</td>
 				<td><input type="text" name="state"></td>
 			</tr>
 			<tr>
-				<td>Country:</td>
+				<td class="checkout-text">Country:</td>
 				<td><input type="text" name="country"></td>
 			</tr>
-			<tr>
-				<td>Email:</td>
-				<td><input type="text" name="email"></td>
-			</tr>
+
 		</table>
 		<br>
 		<input type="submit" value="Submit Order">
 	</form>
+	</div>
+	</div>
+        </div>
+      </section>
+	  </section>
 </body>
 </html>

@@ -212,20 +212,21 @@ button {
     padding-top: 55px;
     display: flex;
     justify-content: left;
+    height: 100%;
     margin:auto !important;
 }
 
 #main {
-    /* margin-top: 18px; */
+    
     flex-basis: 55%;
     background-color: var(--color-beige);
 }
 
 #side {
-    margin-top: 18px;
+    
     flex-basis: 15%;
     background-color: var(--color-pale-yellow);
-    
+    height: auto;
     
     
 }
@@ -482,5 +483,10 @@ a.add-item {
     margin: auto;
 }
 
+.checkout-text {
+    color: var(--color-black);
+}
 
-
+.checkout__form {
+    padding: 20px;
+}
