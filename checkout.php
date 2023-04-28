@@ -81,33 +81,33 @@
 	<form name="orderForm" action="processOrder.php" onsubmit="return validateForm()" method="post">
 		<table>
 			<tr>
-				<td class="checkout-text">Name:</td>
+				<td class="checkout-text">Name<span style="color:red">*</span></td>
 				<td><input type="text" name="name"></td>
 			</tr>
 			<tr>
-				<td class="checkout-text">Email:</td>
+				<td class="checkout-text">Email<span style="color:red">*</span></td>
 				<td><input type="text" name="email"></td>
 			</tr>
 			<tr>
-				<td class="checkout-text">Address:</td>
+				<td class="checkout-text">Address<span style="color:red">*</span></td>
 				<td><input type="text" name="address"></td>
 			</tr>
 			<tr>
-				<td class="checkout-text">Suburb:</td>
+				<td class="checkout-text">Suburb<span style="color:red">*</span></td>
 				<td><input type="text" name="suburb"></td>
 			</tr>
 			<tr>
-				<td class="checkout-text">State:</td>
+				<td class="checkout-text">State<span style="color:red">*</span></td>
 				<td><input type="text" name="state"></td>
 			</tr>
 			<tr>
-				<td class="checkout-text">Country:</td>
+				<td class="checkout-text">Country<span style="color:red">*</span></td>
 				<td><input type="text" name="country"></td>
 			</tr>
 
 		</table>
 		<br>
-		<input type="submit" value="Submit Order">
+		<input type="submit" value="Place Order">
 	</form>
 	</div>
 	</div>
